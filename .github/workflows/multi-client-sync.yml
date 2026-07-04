@@ -1,0 +1,81 @@
+name: Multi-client lead source sync
+
+# Runs once daily, early morning UTC, picking up all of "yesterday's" leads
+# for every active client in config/clients.json (see lib/whatconverts.ts
+# resolveDateRange — no START_DATE/END_DATE means "yesterday").
+# Can also be triggered manually from the Actions tab, optionally overriding
+# the date range or restricting to a single client for testing.
+on:
+  schedule:
+    - cron: '0 6 * * *'
+  workflow_dispatch:
+    inputs:
+      start_date:
+        description: 'Optional: START_DATE override (YYYY-MM-DD)'
+        required: false
+      end_date:
+        description: 'Optional: END_DATE override (YYYY-MM-DD)'
+        required: false
+      client_key:
+        description: 'Optional: restrict to one client key from config/clients.json'
+        required: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browser (Chromium only)
+        run: npx playwright install --with-deps chromium
+
+      - name: Run multi-client sync
+        env:
+          START_DATE: ${{ github.event.inputs.start_date }}
+          END_DATE: ${{ github.event.inputs.end_date }}
+          CLIENT_KEY: ${{ github.event.inputs.client_key }}
+          WHATCONVERTS_API_TOKEN: ${{ secrets.WHATCONVERTS_API_TOKEN }}
+          WHATCONVERTS_API_SECRET: ${{ secrets.WHATCONVERTS_API_SECRET }}
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASS: ${{ secrets.SMTP_PASS }}
+          SMTP_FROM: ${{ secrets.SMTP_FROM }}
+          SMTP_TO: ${{ secrets.SMTP_TO }}
+          SA_EMAIL_BLUE_SKY_LANDSCAPING: ${{ secrets.SA_EMAIL_BLUE_SKY_LANDSCAPING }}
+          SA_PASSWORD_BLUE_SKY_LANDSCAPING: ${{ secrets.SA_PASSWORD_BLUE_SKY_LANDSCAPING }}
+          SA_EMAIL_BROTHERS: ${{ secrets.SA_EMAIL_BROTHERS }}
+          SA_PASSWORD_BROTHERS: ${{ secrets.SA_PASSWORD_BROTHERS }}
+          SA_EMAIL_ESSENTIAL_LANDSCAPES: ${{ secrets.SA_EMAIL_ESSENTIAL_LANDSCAPES }}
+          SA_PASSWORD_ESSENTIAL_LANDSCAPES: ${{ secrets.SA_PASSWORD_ESSENTIAL_LANDSCAPES }}
+          SA_EMAIL_HEARTLAND_TURF_LANDSCAPE: ${{ secrets.SA_EMAIL_HEARTLAND_TURF_LANDSCAPE }}
+          SA_PASSWORD_HEARTLAND_TURF_LANDSCAPE: ${{ secrets.SA_PASSWORD_HEARTLAND_TURF_LANDSCAPE }}
+          SA_EMAIL_HOLMES_LAWN_PEST: ${{ secrets.SA_EMAIL_HOLMES_LAWN_PEST }}
+          SA_PASSWORD_HOLMES_LAWN_PEST: ${{ secrets.SA_PASSWORD_HOLMES_LAWN_PEST }}
+          SA_EMAIL_LITTLE_JOHNS_LAWNS: ${{ secrets.SA_EMAIL_LITTLE_JOHNS_LAWNS }}
+          SA_PASSWORD_LITTLE_JOHNS_LAWNS: ${{ secrets.SA_PASSWORD_LITTLE_JOHNS_LAWNS }}
+          SA_EMAIL_MERRILL_SERVICES: ${{ secrets.SA_EMAIL_MERRILL_SERVICES }}
+          SA_PASSWORD_MERRILL_SERVICES: ${{ secrets.SA_PASSWORD_MERRILL_SERVICES }}
+          SA_EMAIL_PRO_OUTDOOR_LLC: ${{ secrets.SA_EMAIL_PRO_OUTDOOR_LLC }}
+          SA_PASSWORD_PRO_OUTDOOR_LLC: ${{ secrets.SA_PASSWORD_PRO_OUTDOOR_LLC }}
+          SA_EMAIL_SIMPLE_LAWNS_LANDSCAPING: ${{ secrets.SA_EMAIL_SIMPLE_LAWNS_LANDSCAPING }}
+          SA_PASSWORD_SIMPLE_LAWNS_LANDSCAPING: ${{ secrets.SA_PASSWORD_SIMPLE_LAWNS_LANDSCAPING }}
+          SA_EMAIL_SUMMIT_LAWNS: ${{ secrets.SA_EMAIL_SUMMIT_LAWNS }}
+          SA_PASSWORD_SUMMIT_LAWNS: ${{ secrets.SA_PASSWORD_SUMMIT_LAWNS }}
+        run: npx playwright test multi-client-sync
+
+      - name: Upload Playwright report (on failure)
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 14

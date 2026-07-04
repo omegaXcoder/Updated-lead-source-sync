@@ -34,9 +34,9 @@ export default defineConfig({
   use: {
     baseURL: process.env.BASE_URL,
 
-    // Client wants to watch/spot-check the lead-source sync run visibly for
-    // now rather than trust it unattended — revisit once it's proven out.
-    headless: false,
+    // Headed locally (client wants to watch/spot-check runs), headless in CI
+    // (GitHub Actions runners have no display; CI=true is set automatically).
+    headless: !!process.env.CI,
 
     // Generous action + navigation timeouts so slow pages don't error out.
     actionTimeout: 30_000,
@@ -49,21 +49,33 @@ export default defineConfig({
   },
 
   projects: [
-    // 1) Auth setup — logs in once (using .env) and saves the session.
-    //    Runs before everything else via the `dependencies` below.
+    // 1) Auth setup — logs in once as Holmes (using .env) and saves the
+    //    session. Only the single-client script needs this.
     {
       name: 'setup',
       testMatch: /auth\.setup\.ts/,
     },
 
-    // 2) The actual automations — start already logged in via storageState.
+    // 2) Single-client script (Holmes) — starts already logged in via storageState.
     {
       name: 'chromium',
+      testMatch: /lead-source-sync\.spec\.ts|example\.task\.spec\.ts/,
       use: {
         ...devices['Desktop Chrome'],
         storageState: 'playwright/.auth/state.json',
       },
       dependencies: ['setup'],
+    },
+
+    // 3) Multi-client script — each client logs in fresh in its own isolated
+    //    browser context (see tests/multi-client-sync.spec.ts), so this
+    //    project needs neither the Holmes-specific setup nor storageState.
+    {
+      name: 'multi-client',
+      testMatch: /multi-client-sync\.spec\.ts/,
+      use: {
+        ...devices['Desktop Chrome'],
+      },
     },
   ],
 });
