@@ -1,0 +1,39 @@
+{
+  "_comment": "UTM source|medium -> exact SA 'Source' text, specific to Blue Sky Landscaping. Values confirmed live against the actual SA dropdown 2026-07-04.",
+
+  "combined_mapping": {
+    "gmb|none": "GMB Organic",
+    "gmb|organic": "GMB Organic",
+
+    "google|organic": "Google Organic",
+    "google|cpc": "Google cpc",
+
+    "lsa|cpc": "LSA cpc",
+
+    "yahoo|organic": "Google Organic",
+
+    "bing|cpc": "Bing",
+    "bing|organic": "Google Organic",
+
+    "duckduckgo|referral": "Google Organic",
+    "duckduckgo|organic": "Google Organic",
+    "duckduckgo|none": "Google Organic",
+
+    "facebook|none": "Facebook",
+    "facebook.com|none": "Facebook",
+    "instagram|none": "Instagram",
+    "instagram.com|none": "Instagram"
+  },
+
+  "_wildcard_rules": [
+    {
+      "_comment": "Any bare .com domain with medium=referral -> Google Organic",
+      "if_medium": "referral",
+      "if_source_matches_pattern": "\\.com$",
+      "then_source": "Google Organic"
+    }
+  ],
+
+  "_direct_sources": ["(direct)", "direct", "direct visit"],
+  "fallback": "Google Organic"
+}

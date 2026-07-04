@@ -1,0 +1,44 @@
+{
+  "_comment": "UTM source|medium -> exact SA 'Source' text, specific to Little Johns Lawns.",
+
+  "combined_mapping": {
+    "gmb|none": "Google",
+    "gmb|organic": "Google",
+
+    "google|organic": "Google",
+    "google|cpc": "LJL - KUDOS Google Ads",
+
+    "lsa|cpc": "LSA cpc",
+    "angies|cpc": "Angi 2026",
+
+    "yahoo|organic": "Google",
+
+    "bing|organic": "Google",
+
+    "duckduckgo|referral": "Google",
+    "duckduckgo|organic": "Google",
+    "duckduckgo|none": "Google",
+
+    "facebook|none": "Facebook",
+    "facebook.com|none": "Facebook",
+    "instagram|none": "Facebook",
+    "instagram.com|none": "Facebook",
+
+    "chatgpt|none": "ChatGPT - AI",
+    "chatgpt.com|none": "ChatGPT - AI",
+    "claude|none": "ChatGPT - AI",
+    "claude.ai|none": "ChatGPT - AI"
+  },
+
+  "_wildcard_rules": [
+    {
+      "_comment": "Any bare .com domain with medium=referral -> Google",
+      "if_medium": "referral",
+      "if_source_matches_pattern": "\\.com$",
+      "then_source": "Google"
+    }
+  ],
+
+  "_direct_sources": ["(direct)", "direct", "direct visit"],
+  "fallback": "Google Organic"
+}

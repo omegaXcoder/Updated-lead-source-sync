@@ -1,0 +1,45 @@
+{
+  "_comment": "UTM source|medium -> exact SA 'Source' text, specific to Brothers. Values confirmed live against the actual SA dropdown 2026-07-04.",
+
+  "combined_mapping": {
+    "gmb|none": "GMB Google My Business",
+    "gmb|organic": "GMB Google My Business",
+
+    "google|organic": "Google Search (Organic)",
+    "google|cpc": "Google Paid Ads (CPC)",
+
+    "lsa|cpc": "Google LSA (Local Services Ads)",
+
+    "yahoo|organic": "Google Search (Organic)",
+
+    "bing|cpc": "Bing",
+    "bing|organic": "Google Search (Organic)",
+
+    "duckduckgo|referral": "Google Search (Organic)",
+    "duckduckgo|organic": "Google Search (Organic)",
+    "duckduckgo|none": "Google Search (Organic)",
+
+    "facebook|none": "Facebook",
+    "facebook.com|none": "Facebook",
+    "instagram|none": "Instagram",
+    "instagram.com|none": "Instagram",
+
+    "chatgpt|none": "Claude/ChatGPT or AI",
+    "chatgpt.com|none": "Claude/ChatGPT or AI",
+    "claude|none": "Claude/ChatGPT or AI",
+    "claude.ai|none": "Claude/ChatGPT or AI"
+  },
+  "_bing_cpc_comment": "NEEDS CLIENT CONFIRMATION: the live SA dropdown has no 'Bing' option at all (checked 2026-07-04) — bing|cpc currently points at a value that doesn't exist. Left as-is (will error safely rather than silently pick something wrong) until confirmed what CPC clicks from Bing should map to.",
+
+  "_wildcard_rules": [
+    {
+      "_comment": "Any bare .com domain with medium=referral -> Google Search (Organic)",
+      "if_medium": "referral",
+      "if_source_matches_pattern": "\\.com$",
+      "then_source": "Google Search (Organic)"
+    }
+  ],
+
+  "_direct_sources": ["(direct)", "direct", "direct visit"],
+  "fallback": "Google Search (Organic)"
+}

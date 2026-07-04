@@ -1,0 +1,42 @@
+{
+  "_comment": "UTM source|medium -> exact SA 'Source' text, specific to Summit Lawns.",
+
+  "combined_mapping": {
+    "gmb|none": "GMB",
+    "gmb|organic": "GMB",
+
+    "google|organic": "Google - Organic",
+    "google|cpc": "Google - Ads / gADS / cpc",
+
+    "lsa|cpc": "Google - LSA",
+
+    "yahoo|organic": "Google - Organic/GMB",
+
+    "bing|cpc": "Bing",
+    "bing|organic": "Google - Organic/GMB",
+
+    "duckduckgo|referral": "Google - Organic/GMB",
+    "duckduckgo|organic": "Google - Organic/GMB",
+    "duckduckgo|none": "Google - Organic/GMB",
+
+    "facebook|none": "Facebook/Instagram",
+    "facebook.com|none": "Facebook/Instagram",
+    "instagram|none": "Facebook/Instagram",
+    "instagram.com|none": "Facebook/Instagram",
+
+    "chatgpt|none": "AI Search - ChatGPT etc",
+    "chatgpt.com|none": "AI Search - ChatGPT etc"
+  },
+
+  "_wildcard_rules": [
+    {
+      "_comment": "Any bare .com domain with medium=referral -> Google - Organic/GMB",
+      "if_medium": "referral",
+      "if_source_matches_pattern": "\\.com$",
+      "then_source": "Google - Organic/GMB"
+    }
+  ],
+
+  "_direct_sources": ["(direct)", "direct", "direct visit"],
+  "fallback": "Google Organic"
+}

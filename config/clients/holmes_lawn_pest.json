@@ -1,0 +1,53 @@
+{
+  "_comment": "UTM source|medium -> exact SA 'Source' text, specific to Holmes Lawn & Pest.",
+
+  "combined_mapping": {
+    "gmbsaltlake|none": "GMBsaltlake",
+    "gmbsaltlake|organic": "GMBsaltlake",
+    "gmbmidvale|none": "GMBmidvale",
+    "gmbmidvale|organic": "GMBmidvale",
+
+    "google|organic": "Google Organic",
+    "google|cpc": "Google CPC",
+
+    "lsa|cpc": "LSA CPC",
+
+    "yahoo|organic": "Yahoo Organic",
+
+    "bing|cpc": "Bing CPC",
+    "bing|organic": "Bing Organic",
+
+    "duckduckgo|referral": "DuckDuckGo",
+    "duckduckgo|organic": "DuckDuckGo",
+    "duckduckgo|none": "DuckDuckGo",
+
+    "facebook|none": "Facebook / Instagram",
+    "facebook|social": "Facebook / Instagram",
+    "facebook.com|none": "Facebook / Instagram",
+    "instagram|none": "Facebook / Instagram",
+    "instagram.com|none": "Facebook / Instagram",
+
+    "chatgpt.com|none": "Chatgpt/ Copilot/ Gemini",
+    "chatgpt|none": "Chatgpt/ Copilot/ Gemini",
+    "copilot.microsoft.com|none": "Chatgpt/ Copilot/ Gemini",
+    "gemini.google.com|none": "Chatgpt/ Copilot/ Gemini",
+
+    "postcard|none": "10/10/100 Postcard",
+    "postcard|direct": "10/10/100 Postcard"
+  },
+
+  "_wildcard_rules": [
+    {
+      "_comment": "Any bare .com domain with medium=referral -> Google Organic",
+      "if_medium": "referral",
+      "if_source_matches_pattern": "\\.com$",
+      "then_source": "Google Organic"
+    }
+  ],
+
+  "_direct_sources": ["(direct)", "direct", "direct visit"],
+  "_direct_sources_comment": "Leads whose PRIMARY attribution matches one of these use FILL-BLANK-ONLY logic, UNLESS a better touchpoint exists elsewhere in the customer journey.",
+
+  "fallback": "Google Organic",
+  "_fallback_comment": "Used whenever SA's Source field is blank AND no other rule matches."
+}

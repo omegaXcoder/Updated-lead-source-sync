@@ -1,0 +1,42 @@
+{
+  "_comment": "UTM source|medium -> exact SA 'Source' text, specific to Merrill Services.",
+
+  "combined_mapping": {
+    "gmb|none": "GMB Organic",
+    "gmb|organic": "GMB Organic",
+
+    "google|organic": "Google - Organic/website",
+    "google|cpc": "Google - Ads - CPC",
+
+    "lsa|cpc": "Google LSA",
+
+    "yahoo|organic": "Google - Organic/website",
+
+    "bing|organic": "Bing",
+    "bing|cpc": "Bing",
+
+    "duckduckgo|referral": "duckduckgo.com",
+    "duckduckgo|organic": "duckduckgo.com",
+    "duckduckgo|none": "duckduckgo.com",
+
+    "facebook|none": "Facebook",
+    "facebook.com|none": "Facebook",
+    "instagram|none": "Facebook",
+    "instagram.com|none": "Facebook",
+
+    "chatgpt|none": "ChatGPT",
+    "chatgpt.com|none": "ChatGPT"
+  },
+
+  "_wildcard_rules": [
+    {
+      "_comment": "Any bare .com domain with medium=referral -> Google - Organic/website",
+      "if_medium": "referral",
+      "if_source_matches_pattern": "\\.com$",
+      "then_source": "Google - Organic/website"
+    }
+  ],
+
+  "_direct_sources": ["(direct)", "direct", "direct visit"],
+  "fallback": "Google Organic"
+}

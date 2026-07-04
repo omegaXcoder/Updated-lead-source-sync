@@ -1,0 +1,45 @@
+{
+  "_comment": "UTM source|medium -> exact SA 'Source' text, specific to Essential Landscapes. Values confirmed live against the actual SA dropdown 2026-07-04.",
+
+  "combined_mapping": {
+    "gmb|none": "GMB Organic",
+    "gmb|organic": "GMB Organic",
+
+    "google|organic": "Google Organic",
+    "google|cpc": "Google CPC",
+
+    "lsa|cpc": "LSA CPC",
+
+    "yahoo|organic": "Google Organic",
+
+    "bing|organic": "Google Organic",
+    "bing|cpc": "Google Organic",
+
+    "duckduckgo|referral": "Google Organic",
+    "duckduckgo|organic": "Google Organic",
+    "duckduckgo|none": "Google Organic",
+
+    "facebook|none": "Facebook",
+    "facebook.com|none": "Facebook",
+    "instagram|none": "Facebook",
+    "instagram.com|none": "Facebook",
+
+    "chatgpt|none": "ChatGPT - AI",
+    "chatgpt.com|none": "ChatGPT - AI",
+    "claude|none": "ChatGPT - AI",
+    "claude.ai|none": "ChatGPT - AI"
+  },
+  "_chatgpt_comment": "NEEDS CLIENT CONFIRMATION: the live SA dropdown has NO ChatGPT/AI option at all (checked 2026-07-04) — these 4 rules point at a value that doesn't exist. Left as-is (will error safely rather than silently pick something wrong) until confirmed what AI-sourced leads should map to.",
+
+  "_wildcard_rules": [
+    {
+      "_comment": "Any bare .com domain with medium=referral -> Google Organic",
+      "if_medium": "referral",
+      "if_source_matches_pattern": "\\.com$",
+      "then_source": "Google Organic"
+    }
+  ],
+
+  "_direct_sources": ["(direct)", "direct", "direct visit"],
+  "fallback": "Google Organic"
+}

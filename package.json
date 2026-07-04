@@ -1,0 +1,23 @@
+{
+  "name": "playwright-sop-automations",
+  "version": "1.0.0",
+  "private": true,
+  "description": "SOP-driven Playwright automations built via Playwright MCP",
+  "scripts": {
+    "auth": "playwright test --project=setup",
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "sync": "playwright test lead-source-sync",
+    "sync:all": "playwright test multi-client-sync",
+    "report": "playwright show-report"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.50.0",
+    "@types/node": "^26.1.0",
+    "dotenv": "^16.4.5",
+    "typescript": "^6.0.3"
+  },
+  "dependencies": {
+    "nodemailer": "^9.0.3"
+  }
+}

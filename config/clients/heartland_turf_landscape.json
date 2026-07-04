@@ -1,0 +1,47 @@
+{
+  "_comment": "UTM source|medium -> exact SA 'Source' text, specific to Heartland Turf & Landscape. Values confirmed live against the actual SA dropdown 2026-07-04.",
+
+  "combined_mapping": {
+    "gmb|none": "I used a search engine!",
+    "gmb|organic": "I used a search engine!",
+
+    "google|organic": "I used a search engine!",
+    "google|cpc": "Google Ad",
+
+    "lsa|cpc": "Google Local Service",
+
+    "yahoo|organic": "I used a search engine!",
+
+    "bing|organic": "I used a search engine!",
+    "bing|cpc": "I used a search engine!",
+
+    "duckduckgo|referral": "I used a search engine!",
+    "duckduckgo|organic": "I used a search engine!",
+    "duckduckgo|none": "I used a search engine!",
+
+    "facebook|none": "I saw you on Facebook!",
+    "facebook.com|none": "I saw you on Facebook!",
+    "instagram|none": "I saw you on Facebook!",
+    "instagram.com|none": "I saw you on Facebook!",
+
+    "chatgpt|none": "ChatGPT",
+    "chatgpt.com|none": "ChatGPT",
+
+    "youtube|none": "I saw you on YouTube!",
+    "youtube.com|none": "I saw you on YouTube!"
+  },
+  "_chatgpt_comment": "NEEDS CLIENT CONFIRMATION: the live SA dropdown has NO ChatGPT/AI option at all (checked 2026-07-04) — these 2 rules point at a value that doesn't exist. Left as-is (will error safely rather than silently pick something wrong) until confirmed what AI-sourced leads should map to.",
+
+  "_wildcard_rules": [
+    {
+      "_comment": "Any bare .com domain with medium=referral -> I used a search engine!",
+      "if_medium": "referral",
+      "if_source_matches_pattern": "\\.com$",
+      "then_source": "I used a search engine!"
+    }
+  ],
+
+  "_direct_sources": ["(direct)", "direct", "direct visit"],
+  "fallback": "I used a search engine!",
+  "_fallback_fix_comment": "Was \"Google Organic\", which is NOT a real option in this dropdown (confirmed live 2026-07-04) — changed to match the bucket already used for every other search-engine source in this file."
+}

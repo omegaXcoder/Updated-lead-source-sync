@@ -1,0 +1,62 @@
+{
+  "_comment": "UTM source|medium -> exact SA 'Source' text, specific to Simple Lawns & Landscaping. Note: Facebook/Instagram split by medium (organic vs cpc -> different SA values).",
+
+  "combined_mapping": {
+    "gmb|none": "GMB Organic",
+    "gmb|organic": "GMB Organic",
+
+    "google-business-profile|organic": "GMB Organic",
+
+    "google|organic": "Google Organic",
+    "google|cpc": "Google CPC",
+
+    "lsa|cpc": "LSA CPC",
+
+    "yahoo|organic": "Google Organic",
+
+    "yelp|organic": "Yelp",
+    "yelp|cpc": "Yelp",
+    "yelp|none": "Yelp",
+
+    "bing|organic": "Google Organic",
+    "bing|cpc": "Google Organic",
+
+    "duckduckgo|referral": "Google Organic",
+    "duckduckgo|organic": "Google Organic",
+    "duckduckgo|none": "Google Organic",
+
+    "facebook|none": "Facebook Organic",
+    "facebook|organic": "Facebook Organic",
+    "facebook.com|none": "Facebook Organic",
+    "facebook|cpc": "Facebook CPC",
+    "facebook ads|cpc": "Facebook CPC",
+
+    "instagram|none": "facebook Organic",
+    "instagram|organic": "facebook Organic",
+    "instagram.com|none": "facebook Organic",
+    "instagram|cpc": "Facebook CPC",
+    "instagram ads|cpc": "Facebook CPC",
+
+    "chatgpt|none": "ChatGPT /Claude / Gemini",
+    "chatgpt.com|none": "ChatGPT /Claude / Gemini",
+    "claude|none": "ChatGPT /Claude / Gemini",
+    "claude.ai|none": "ChatGPT /Claude / Gemini",
+    "gemini|none": "ChatGPT /Claude / Gemini",
+    "gemini.google.com|none": "ChatGPT /Claude / Gemini",
+
+    "youtube|none": "Youtube",
+    "youtube.com|none": "Youtube"
+  },
+
+  "_wildcard_rules": [
+    {
+      "_comment": "Any bare .com domain with medium=referral -> Google Organic",
+      "if_medium": "referral",
+      "if_source_matches_pattern": "\\.com$",
+      "then_source": "Google Organic"
+    }
+  ],
+
+  "_direct_sources": ["(direct)", "direct", "direct visit"],
+  "fallback": "Google Organic"
+}

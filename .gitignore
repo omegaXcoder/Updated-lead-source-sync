@@ -1,0 +1,24 @@
+# Secrets — never commit
+.env
+.env.*
+!.env.example
+
+# Saved auth session — this is effectively a live login token. Treat as a secret.
+playwright/.auth/
+**/storageState*.json
+**/state.json
+
+# Dependencies & Playwright output
+node_modules/
+test-results/
+playwright-report/
+blob-report/
+playwright/.cache/
+
+# Playwright MCP debug artifacts (console logs, page snapshots) — these were
+# captured live against real client CRM data during development and must
+# never be committed.
+.playwright-mcp/
+
+# Claude Code local, personal settings — not meant to be shared/versioned.
+.claude/settings.local.json

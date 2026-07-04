@@ -1,0 +1,18 @@
+{
+  "_comment": "One entry per client. NO PASSWORDS GO HERE. SA login comes from env vars SA_EMAIL_<KEY> / SA_PASSWORD_<KEY>.",
+  "_healthy_lawn_note": "healthy_lawn_nj is excluded (active: false) because they use a different CRM, not Service Autopilot — this whole pipeline doesn't apply to them.",
+
+  "clients": [
+    { "key": "blue_sky_landscaping", "wc_account_id": "100694", "wc_account_name": "Blue Sky Landscaping", "mapping_file": "config/clients/blue_sky_landscaping.json", "active": true },
+    { "key": "brothers", "wc_account_id": "100859", "wc_account_name": "Brothers", "mapping_file": "config/clients/brothers.json", "active": true },
+    { "key": "essential_landscapes", "wc_account_id": "112133", "wc_account_name": "Essential Landscapes", "mapping_file": "config/clients/essential_landscapes.json", "active": true },
+    { "key": "healthy_lawn_nj", "wc_account_id": "102720", "wc_account_name": "Healthy Lawn NJ", "mapping_file": "config/clients/healthy_lawn_nj.json", "active": false },
+    { "key": "heartland_turf_landscape", "wc_account_id": "100003", "wc_account_name": "Heartland Turf & Landscape", "mapping_file": "config/clients/heartland_turf_landscape.json", "active": true },
+    { "key": "holmes_lawn_pest", "wc_account_id": "98440", "wc_account_name": "Holmes Lawn & Pest", "mapping_file": "config/clients/holmes_lawn_pest.json", "active": true },
+    { "key": "little_johns_lawns", "wc_account_id": "100363", "wc_account_name": "Little Johns Lawns", "mapping_file": "config/clients/little_johns_lawns.json", "active": true },
+    { "key": "merrill_services", "wc_account_id": "100920", "wc_account_name": "Merrill Services", "mapping_file": "config/clients/merrill_services.json", "active": true },
+    { "key": "pro_outdoor_llc", "wc_account_id": "99739", "wc_account_name": "Pro Outdoor LLC", "mapping_file": "config/clients/pro_outdoor_llc.json", "active": true },
+    { "key": "simple_lawns_landscaping", "wc_account_id": "111938", "wc_account_name": "Simple Lawns & Landscaping", "mapping_file": "config/clients/simple_lawns_landscaping.json", "active": true },
+    { "key": "summit_lawns", "wc_account_id": "99665", "wc_account_name": "Summit Lawns", "mapping_file": "config/clients/summit_lawns.json", "active": true }
+  ]
+}
