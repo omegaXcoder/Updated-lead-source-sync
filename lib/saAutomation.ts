@@ -9,6 +9,13 @@ import type { WhatConvertsLead } from './whatconverts';
  * fixes both.
  */
 
+// A bare relative goto("/Home.aspx") only resolves if Playwright's `baseURL`
+// config is set (from the BASE_URL env var), which isn't configured in the
+// GitHub Actions workflow — confirmed live: every client's first navigation
+// failed there with "Cannot navigate to invalid URL". Building an absolute
+// URL here removes the dependency on that env var entirely.
+const DEFAULT_SA_BASE_URL = 'https://my.serviceautopilot.com/';
+
 export async function loginToSA(page: Page, baseUrl: string, email: string, password: string) {
   await page.goto(baseUrl);
   await page.getByRole('textbox', { name: 'Email' }).fill(email);
@@ -22,7 +29,8 @@ export async function loginToSA(page: Page, baseUrl: string, email: string, pass
  * one starts from a known-clean state instead of chaining off whatever the
  * previous search/edit left behind (client's explicit request). */
 export async function resetToHome(page: Page) {
-  await page.goto('/Home.aspx');
+  const baseUrl = process.env.BASE_URL || DEFAULT_SA_BASE_URL;
+  await page.goto(new URL('/Home.aspx', baseUrl).toString());
   await expect(page.locator('.v3GlobalSearch--SearchIconArrow')).toBeVisible({ timeout: 30_000 });
 }
 
